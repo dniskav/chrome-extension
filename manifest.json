@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Miles+ Filler",
+  "description": "This extension is to fill Miles+ easier",
+  "version": "1.0",
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": "images/icons/icon-32.png"
+  },
+  "icons": {
+    "16": "images/icons/icon-16.png",
+    "32": "images/icons/icon-32.png",
+    "48": "images/icons/icon-48.png",
+    "128": "images/icons/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "js": ["scripts/background.js"],
+      "matches": [
+        "https://*.google.com/*",
+        "https://*.google.es/*"
+      ]
+    }
+  ],
+  "permissions": [
+    "storage"
+  ]
+}
