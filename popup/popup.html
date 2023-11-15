@@ -3,14 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
   <title>Document</title>
 </head>
 <body>
-  Chrome Miles +
-  cargar año:
-  año : <input type="text" name="year" id="year">
-  festivos: <textarea name="holidays" id="holidays" cols="30" rows="10"></textarea>
-  <input type="button" value="guardar" id="saveBtn">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h3>Chrome Miles +</h3>
+        <p class="small">se puede cargar los festivos copiando la lista desde: </p>
+        <a href="https://www.elperiodico.com/es/temas/calendario-laboral-11610" target="_blank">https://www.elperiodico.com/es</a>
+      
+        <label>
+          ciudad : <input type="text" name="location" id="location">
+        </label>
+      
+        <h4>cargar año:</h4>
+      
+        <label>
+          Nùmero del año : <input type="text" name="year" id="year">
+        </label>
+      
+        <label>
+          festivos: <textarea name="holidays" id="holidays" cols="30" rows="10"></textarea>
+        </label>
+      
+        <input type="button" value="Guardar" id="saveBtn">
+        <input type="button" value="Cargar" id="loadBtn">
+      </div>
+    </div>
+  </div>
+
   <script src="popup.js"></script>
 </body>
 </html>

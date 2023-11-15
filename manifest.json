@@ -18,7 +18,8 @@
       "js": ["scripts/background.js"],
       "matches": [
         "https://*.google.com/*",
-        "https://*.google.es/*"
+        "https://*.google.es/*",
+        "https://websso.t-systems.com/milesplus/prod/mpp1/plsql/*"
       ]
     }
   ],
