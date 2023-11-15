@@ -4,32 +4,49 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="popup.css">
   <title>Document</title>
 </head>
 <body>
   <div class="container">
     <div class="row">
-      <div class="col">
+      <class="col">
         <h3>Chrome Miles +</h3>
-        <p class="small">se puede cargar los festivos copiando la lista desde: </p>
+        <p class="small">Si se usa WEB se puede cargar los festivos copiando la lista desde: </p>
         <a href="https://www.elperiodico.com/es/temas/calendario-laboral-11610" target="_blank">https://www.elperiodico.com/es</a>
-      
-        <label>
-          ciudad : <input type="text" name="location" id="location">
-        </label>
-      
-        <h4>cargar año:</h4>
-      
-        <label>
-          Nùmero del año : <input type="text" name="year" id="year">
-        </label>
-      
-        <label>
-          festivos: <textarea name="holidays" id="holidays" cols="30" rows="10"></textarea>
-        </label>
-      
-        <input type="button" value="Guardar" id="saveBtn">
-        <input type="button" value="Cargar" id="loadBtn">
+        <p>o usando un formato en español con salto de línea al final ej: 1 de noviembre</p>
+        <p>o usando un separador tipo: 25/12/2023 donde el separador es: /</p>
+        <div class="input-group">
+          <input class="form-control" placeholder="ciudad" type="text" name="location" id="location">
+          <input class="form-control" placeholder="año" type="text" name="year" id="year">
+        </div>
+
+        <form id="radios">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="holidaysType" id="web" value="web">
+            <label class="form-check-label" for="web">web</label>
+          </div>
+          
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="holidaysType" id="customSeparator" value="custom">
+            <label class="form-check-label" for="customSeparator">Custom Separator</label>
+          </div>
+        </form>
+
+        <div class="input-group">
+          <input class="form-check-label" type="text" name="separator" id="separator" class="separator"  value="">
+        </div>
+
+        <span>Festivos:</span>
+        
+        <div class="input-group">
+          <textarea class="form-control" name="holidays" id="holidays" cols="30" rows="5"></textarea>
+        </div>
+
+        <div class="btn-group" role="group">
+          <input type="button" class="btn btn-outline-success btn-sm" value="Guardar" id="saveBtn">
+          <input type="button" class="btn btn-outline-primary btn-sm" value="Cargar" id="loadBtn">
+        </div>
       </div>
     </div>
   </div>

@@ -15,14 +15,10 @@ let weekDays = [...document.querySelectorAll("#delayedDisplay > form > table > t
   ];
 });
 
-
 async function loadData() {
-  
   let result = await chrome.storage.sync.get(["holidaysPerYear"]);
   holidays = result.holidaysPerYear.holidays;
   addAutoFillButton();
-
-  console.log('data? ', holidays, weekDays);
 };
 
 function addAutoFillButton() {
@@ -45,7 +41,7 @@ function fillWeek() {
   weekFields.every(e => {
     let notWeekend = e.className !== 'weekend';
 
-    if(!notWeekend || e.name === 'i_row_sum') {
+    if(!notWeekend || e.name === 'i_row_sum' || current > weekLength) {
       current = 0;
       return true;
     };
@@ -54,8 +50,10 @@ function fillWeek() {
       weekLength++;
       e.value = checkHoliday(current) ? '' : '08:00';
     } else if(e.name === 'i_geht' && notWeekend) {
+        if(current >= weekDays.length) current = 0;
         e.value = checkHoliday(current) ? '' : '16:00';
     } else if(e.name === 'i_az' ) {
+      if(current >= weekDays.length) current = 0;
       if (!notWeekend || rowLength >= weekLength) return false;
         rowLength++;
         e.value = checkHoliday(current) ? '' : '08:00';
@@ -64,8 +62,6 @@ function fillWeek() {
     current++;
     return true;
   });
-
-  console.log(weekFields)
 }
 
 function checkHoliday(current) {
