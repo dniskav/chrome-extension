@@ -4,7 +4,7 @@ let i_von = document.querySelector('[name=i_von]');
 let i_bis = document.querySelector('[name=i_bis]');
 let autoFillBtnContainer = document.querySelector("#delayedDisplay > form > table > tbody > tr:nth-child(1) > td:nth-child(2)");
 let weekFields = [...document.querySelectorAll("#delayedDisplay > form > table > tbody input[type=text]")];
-let holidays = [];
+let holidaysPerYear = {};
 let weekDays = [...document.querySelectorAll("#delayedDisplay > form > table > tbody > tr:nth-child(1) input[name=i_datum]")].map(e => {
   let arr = e.value.split('.');
 
@@ -15,10 +15,10 @@ let weekDays = [...document.querySelectorAll("#delayedDisplay > form > table > t
   ];
 });
 
-async function loadData() {
+async function loadData(addButon = true) {
   let result = await chrome.storage.sync.get(["holidaysPerYear"]);
-  holidays = result.holidaysPerYear.holidays;
-  addAutoFillButton();
+  holidaysPerYear = result.holidaysPerYear;
+  if (addButon) addAutoFillButton();
 };
 
 function addAutoFillButton() {
@@ -48,15 +48,15 @@ function fillWeek() {
 
     if(e.name === 'i_kommt' && notWeekend) {
       weekLength++;
-      e.value = checkHoliday(current) ? '' : '08:00';
+      e.value = checkHoliday(current) ? '' : holidaysPerYear.startTime ? holidaysPerYear.startTime : '08:00';
     } else if(e.name === 'i_geht' && notWeekend) {
         if(current >= weekDays.length) current = 0;
-        e.value = checkHoliday(current) ? '' : '16:00';
+        e.value = checkHoliday(current) ? '' : holidaysPerYear.endTime ? holidaysPerYear.endTime : '16:00';
     } else if(e.name === 'i_az' ) {
       if(current >= weekDays.length) current = 0;
       if (!notWeekend || rowLength >= weekLength) return false;
         rowLength++;
-        e.value = checkHoliday(current) ? '' : '08:00';
+        e.value = checkHoliday(current) ? '' : holidaysPerYear.totalTime ? holidaysPerYear.totalTime : '08:00';
     }
 
     current++;
@@ -65,7 +65,11 @@ function fillWeek() {
 }
 
 function checkHoliday(current) {
-  return holidays.some(e => e.join('.') === weekDays[current].join('.'))
+  return holidaysPerYear.holidays.some(e => e.join('.') === weekDays[current].join('.'))
 }
+
+chrome.storage.onChanged.addListener((changes, namespace) => {
+  loadData(false);
+});
 
 loadData();

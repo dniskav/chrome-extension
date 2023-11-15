@@ -11,3 +11,7 @@ body {
 h3 {
   color: #E20074;
 }
+
+.row {
+  margin-bottom: 5px
+}
