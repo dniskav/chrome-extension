@@ -1,0 +1,17 @@
+body {
+  font-size: 80%;
+  width: 330px;
+  background-color: #F0F0F0;
+}
+
+.separator {
+  width: 20px;
+}
+
+h3 {
+  color: #E20074;
+}
+
+.row {
+  margin-bottom: 5px
+}
