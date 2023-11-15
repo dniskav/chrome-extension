@@ -94,7 +94,7 @@ function formatWebData(location, year) {
   return holidaysStrings.map((e) => {
     e = e.split('de');
     let day = Math.floor(e[0].trim());
-    let month = months[e[1].trim().split(/\:|,|\s/gm)[0]];
+    let month = months[e[1].trim().split(/\:|,|\s/gm)[0].toLowerCase()];
     return [day, month, year];
   });
 }
