@@ -24,7 +24,7 @@ console.log('Miles+ auto fill extension working!');
 let result = {};
 let i_von = document.querySelector('[name=i_von]');
 let i_bis = document.querySelector('[name=i_bis]');
-let autoFillBtnContainer = document.querySelector("#delayedDisplay > form > table > tbody > tr:nth-child(1) > td:nth-child(2)");
+let autoFillBtnContainer = document.querySelector('#delayedDisplay > form[action="pweektime_gc.createpage_week"] > table > tbody > tr:nth-child(1) > td:nth-child(2)');
 let weekFields = [...document.querySelectorAll("#delayedDisplay > form > table > tbody input[type=text]")];
 let holidaysPerYear = defaultData;
 let weekDays = [...document.querySelectorAll("#delayedDisplay > form > table > tbody > tr:nth-child(1) input[name=i_datum]")].map(e => {
@@ -59,7 +59,7 @@ function addAutoFillButton() {
   autoFillButton.onclick = fillWeek;
   autoFillButton.style.cssText = 'width: 100%; border-radius: 10px; font-size: 14px; padding: 3px; ';
 
-  autoFillBtnContainer.appendChild(autoFillButton);
+  autoFillBtnContainer.prepend(autoFillButton);
 }
 
 function fillWeek() {

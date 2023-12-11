@@ -24,7 +24,7 @@
     {
       "js": ["scripts/background.js"],
       "matches": [
-        "https://websso.t-systems.com/milesplus/prod/mpp1/plsql/*"
+        "https://websso.t-systems.com/milesplus/prod/*"
       ]
     }
   ],
