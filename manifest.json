@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Miles+ Filler",
   "description": "This extension is to fill Miles+ easier",
-  "version": "0.1",
+  "version": "0.2",
   "author": "D-niskav",
   "action": {
     "default_popup": "popup/popup.html",
