@@ -8,6 +8,7 @@ let totalTimeField = document.querySelector('#totalTime');
 let holidaysTypeField = document.getElementById('radios').elements.holidaysType;
 let yearField = document.querySelector('#year');
 let holidaysField = document.querySelector('#holidays');
+let languageSelector = document.querySelectorAll('.language input[type=radio]');
 
 let months = {
   enero: 1,
@@ -27,6 +28,18 @@ let months = {
 loadButton.addEventListener('click', () => {
   getData();
 });
+
+languageSelector.forEach( node => {
+  // add listeners
+  node.addEventListener('change', ev => {
+    console.log(ev.target.value);
+    const lang = ev.target.value;
+    chrome.storage.sync.set({ lang }).then(() => {
+      console.log(`lang ${lang} saved`);
+    });
+  });
+})
+
 
 saveButton.addEventListener('click', saveData);
 startTimeField.addEventListener('blur', e => e.target.value = formatTime(e.target.value));
@@ -120,3 +133,13 @@ function formatTime(str) {
 
   return formattedHour;
 }
+
+function loadConfiguration() {
+  chrome.storage.sync.get(['lang']).then((result) => {
+    languageSelector.forEach( node => {
+      if(node.value === result.lang) node.checked = true;
+    })
+  });
+}
+
+loadConfiguration();
