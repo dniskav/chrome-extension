@@ -1,3 +1,6 @@
+import en from '../i18n/en.json' assert { type: 'json' };
+import es from '../i18n/es.json' assert { type: 'json' };
+
 let saveButton = document.querySelector('#saveBtn');
 let loadButton = document.querySelector('#loadBtn');
 let locationField = document.querySelector('#location');
@@ -142,4 +145,30 @@ function loadConfiguration() {
   });
 }
 
+window.translate = () => {
+  const dom = document.querySelectorAll('body *');
+  const treeWalker = document.createTreeWalker(
+    document.body,
+    NodeFilter.SHOW_TEXT, // Mostrar solo nodos de texto
+    null,
+    false
+  );
+
+  while (treeWalker.nextNode()) {
+    const matched = treeWalker.currentNode.nodeValue.match(/\{\{([a-zA-Z0-9_.]*)\}\}/);
+    console.log(treeWalker.currentNode);
+
+    if(matched) {
+      const toFindAndReplace = matched[0];
+      const jsonString = matched[1];
+      const parts = jsonString.split('.');
+
+      const value = parts.reduce((obj, key) => (obj && obj[key] !== 'undefined') ? obj[key] : undefined, es);
+      treeWalker.currentNode.nodeValue = treeWalker.currentNode.nodeValue.replace(toFindAndReplace, value);
+    }
+
+  }
+}
+
 loadConfiguration();
+translate();
