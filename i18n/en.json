@@ -3,7 +3,17 @@
     "text": {
       "description": "If you use WEB you can load the holidays by copying the list from:",
       "info1": "or  using an english format with 'new line' at end example: 1 of november",
-      "info2": "also using a separator type: 12/25/2023 where the separator is: /"
+      "info2": "also using a separator type: 12/25/2023 where the separator is: /",
+      "city": "City",
+      "year": "year",
+      "startTime": "Start time",
+      "endTime": "End time",
+      "totalTime": "Total time",
+      "webLabel": "web",
+      "customSeparatorLabel": "Separator (only for custom)",
+      "holidays": "Holidays list (to verify)",
+      "save": "Save",
+      "load": "Load"
     }
   }
 }

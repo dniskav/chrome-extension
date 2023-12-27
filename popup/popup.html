@@ -34,14 +34,14 @@
         
         <div class="row">
           <div class="input-group">
-            <input class="form-control" placeholder="ciudad" type="text" name="location" id="location">
-            <input class="form-control" placeholder="año" type="text" name="year" id="year">
+            <input class="form-control" placeholder="{{general.text.city}}" type="text" name="location" id="location">
+            <input class="form-control" placeholder="{{general.text.year}}" type="text" name="year" id="year">
           </div>
 
           <div class="input-group">
-            <input class="form-control" placeholder="hora inicio" type="text" name="startTime" id="startTime">
-            <input class="form-control" placeholder="hora final" type="text" name="endTime" id="endTime">
-            <input class="form-control" placeholder="Total horas" type="text" name="totalTime" id="totalTime">
+            <input class="form-control" placeholder="{{general.text.startTime}}" type="text" name="startTime" id="startTime">
+            <input class="form-control" placeholder="{{general.text.endTime}}" type="text" name="endTime" id="endTime">
+            <input class="form-control" placeholder="{{general.text.totalTime}}" type="text" name="totalTime" id="totalTime">
           </div>
         </div>
 
@@ -49,12 +49,12 @@
           <form id="radios">
             <div class="form-check">
               <input class="form-check-input" type="radio" name="holidaysType" id="web" value="web">
-              <label class="form-check-label" for="web">web</label>
+              <label class="form-check-label" for="web">{{general.text.webLabel}}</label>
             </div>
             
             <div class="form-check">
               <input class="form-check-input" type="radio" name="holidaysType" id="customSeparator" value="custom">
-              <label class="form-check-label" for="customSeparator">Separator (solo para custom)</label>
+              <label class="form-check-label" for="customSeparator">{{general.text.customSeparatorLabel}}</label>
             </div>
           </form>
       </div>
@@ -66,7 +66,7 @@
         </div>
 
         <div class="row">
-          <span>Festivos:</span>
+          <span>{{general.text.holidays}}</span>
         </div>
         
         <div class="row">
@@ -77,8 +77,8 @@
 
         <div class="row">
           <div class="btn-group" role="group">
-            <input type="button" class="btn btn-outline-success btn-sm" value="Guardar" id="saveBtn">
-            <input type="button" class="btn btn-outline-primary btn-sm" value="Cargar" id="loadBtn">
+            <input type="button" class="btn btn-outline-success btn-sm" value="{{general.text.save}}" id="saveBtn">
+            <input type="button" class="btn btn-outline-primary btn-sm" value="{{general.text.load}}" id="loadBtn">
           </div>
         </div>
       </div>

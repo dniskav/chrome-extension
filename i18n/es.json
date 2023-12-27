@@ -3,7 +3,17 @@
     "text": {
       "description": "Si se usa WEB se puede cargar los festivos copiando la lista desde:",
       "info1": "o usando un formato en español con salto de línea al final ej: 1 de noviembre",
-      "info2": "también usando un separador tipo: 25/12/2023 donde el separador es: /"
+      "info2": "también usando un separador tipo: 25/12/2023 donde el separador es: /",
+      "city": "Ciudad",
+      "year": "Año",
+      "startTime": "Hora inicio",
+      "endTime": "Hora final",
+      "totalTime": "Total horas",
+      "webLabel": "web",
+      "customSeparatorLabel": "Separador (solo para custom)",
+      "holidays": "Lista de festivos (para verificar)",
+      "save": "Guardar",
+      "load": "Cargar"
     }
   }
 }

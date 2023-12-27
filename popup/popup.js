@@ -1,17 +1,19 @@
-import en from '../i18n/en.json' assert { type: 'json' };
-import es from '../i18n/es.json' assert { type: 'json' };
+import { translate } from '../scripts/i18n.js';
 
-let saveButton = document.querySelector('#saveBtn');
-let loadButton = document.querySelector('#loadBtn');
-let locationField = document.querySelector('#location');
-let separatorField = document.querySelector('#separator');
-let startTimeField = document.querySelector('#startTime');
-let endTimeField = document.querySelector('#endTime');
-let totalTimeField = document.querySelector('#totalTime');
-let holidaysTypeField = document.getElementById('radios').elements.holidaysType;
-let yearField = document.querySelector('#year');
-let holidaysField = document.querySelector('#holidays');
-let languageSelector = document.querySelectorAll('.language input[type=radio]');
+const saveButton = document.querySelector('#saveBtn');
+const loadButton = document.querySelector('#loadBtn');
+const locationField = document.querySelector('#location');
+const separatorField = document.querySelector('#separator');
+const startTimeField = document.querySelector('#startTime');
+const endTimeField = document.querySelector('#endTime');
+const totalTimeField = document.querySelector('#totalTime');
+const holidaysTypeField = document.getElementById('radios').elements.holidaysType;
+const yearField = document.querySelector('#year');
+const holidaysField = document.querySelector('#holidays');
+const languageSelector = document.querySelectorAll('.language input[type=radio]');
+
+window.translate = translate;
+
 
 let months = {
   enero: 1,
@@ -27,6 +29,8 @@ let months = {
   noviembre: 11,
   diciembre: 12,
 };
+
+let lang = 'es';
 
 loadButton.addEventListener('click', () => {
   getData();
@@ -70,6 +74,7 @@ function saveData() {
   let startTime = startTimeField.value;
   let endTime = endTimeField.value;
   let totalTime = totalTimeField.value;
+  let holidaysPerYear = {};
 
   let holidays = [];
 
@@ -137,38 +142,13 @@ function formatTime(str) {
   return formattedHour;
 }
 
-function loadConfiguration() {
+window.loadConfiguration = () => {
   chrome.storage.sync.get(['lang']).then((result) => {
+    translate(result.lang);
     languageSelector.forEach( node => {
       if(node.value === result.lang) node.checked = true;
     })
   });
 }
 
-window.translate = () => {
-  const dom = document.querySelectorAll('body *');
-  const treeWalker = document.createTreeWalker(
-    document.body,
-    NodeFilter.SHOW_TEXT, // Mostrar solo nodos de texto
-    null,
-    false
-  );
-
-  while (treeWalker.nextNode()) {
-    const matched = treeWalker.currentNode.nodeValue.match(/\{\{([a-zA-Z0-9_.]*)\}\}/);
-    console.log(treeWalker.currentNode);
-
-    if(matched) {
-      const toFindAndReplace = matched[0];
-      const jsonString = matched[1];
-      const parts = jsonString.split('.');
-
-      const value = parts.reduce((obj, key) => (obj && obj[key] !== 'undefined') ? obj[key] : undefined, es);
-      treeWalker.currentNode.nodeValue = treeWalker.currentNode.nodeValue.replace(toFindAndReplace, value);
-    }
-
-  }
-}
-
 loadConfiguration();
-translate();
