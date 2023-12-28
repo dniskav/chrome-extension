@@ -22,16 +22,32 @@ export const translate = (lang = 'es') => {
     const node = treeWalker.currentNode;
 
     if (node.nodeType === Node.TEXT_NODE) {
-      const matched = node.nodeValue.match(testTranslateTemplate);
+      const textMatched = node.customTranslateTemplate ? node.customTranslateTemplate.match(testTranslateTemplate) : node.nodeValue.match(testTranslateTemplate);
+      let matched = '';
+
+      if(textMatched) {
+        if(!node.customTranslateTemplate) {
+          addTemplateProp(node, textMatched[0]);
+        }
+        matched = node.customTranslateTemplate.match(testTranslateTemplate);
+      }
+
       if(matched) {
         const value = buildTranslateString(matched, languages[lang]);
         
-        node.nodeValue = node.nodeValue.replace(matched[0], value);
+        node.nodeValue = value;
       }
     } else if (node.nodeType === Node.ELEMENT_NODE) {
       node.getAttributeNames()
       .forEach(atr => {
-        const matched = node.getAttribute(atr).match(testTranslateTemplate);
+        let matched;
+        const textMatched = node.customTranslateTemplate ? node?.customTranslateTemplate[atr]?.match(testTranslateTemplate) : node.getAttribute(atr).match(testTranslateTemplate);
+  
+        if(textMatched) {
+          addTemplateProp(node, textMatched[0], atr);
+          matched = node.customTranslateTemplate[atr].match(testTranslateTemplate);
+        }
+
         if(matched) {
           const value = buildTranslateString(matched, languages[lang]);
           
@@ -40,6 +56,23 @@ export const translate = (lang = 'es') => {
       });
     }
   }
+}
+
+function addTemplateProp(node, template, atr = null) {
+  if (node.nodeType === Node.ELEMENT_NODE) {
+    const customTranslateTemplate = node.customTranslateTemplate || {};
+    customTranslateTemplate[atr] = template;
+
+    node['customTranslateTemplate'] = {...customTranslateTemplate };
+
+    console.log(customTranslateTemplate)
+  } else {
+    if(node.setAttribute) {
+      node.setAttribute('customTranslateTemplate', template);
+    } else {
+      node.customTranslateTemplate = template;
+    }
+  };
 }
 
 function buildTranslateString(matched, lang) {

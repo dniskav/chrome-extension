@@ -43,6 +43,7 @@ languageSelector.forEach( node => {
     const lang = ev.target.value;
     chrome.storage.sync.set({ lang }).then(() => {
       console.log(`lang ${lang} saved`);
+      translate(lang);
     });
   });
 })
