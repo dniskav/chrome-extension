@@ -1,15 +1,8 @@
-import en from '../i18n/en.json' assert { type: 'json' };
-import es from '../i18n/es.json' assert { type: 'json' };
-
 const testTranslateTemplate = /\{\{([a-zA-Z0-9_.]*)\}\}/; 
 
-const languages = {
-  en,
-  es,
-}
+let languages = {}
 
 export const translate = (lang = 'es') => {
-  const dom = document.querySelectorAll('body *');
   const treeWalker = document.createTreeWalker(
     document.body,
     NodeFilter.SHOW_ALL,
@@ -64,8 +57,6 @@ function addTemplateProp(node, template, atr = null) {
     customTranslateTemplate[atr] = template;
 
     node['customTranslateTemplate'] = {...customTranslateTemplate };
-
-    console.log(customTranslateTemplate)
   } else {
     if(node.setAttribute) {
       node.setAttribute('customTranslateTemplate', template);
@@ -80,4 +71,12 @@ function buildTranslateString(matched, lang) {
   const parts = jsonString.split('.');
   
   return parts.reduce((obj, key) => (obj && obj[key] !== 'undefined') ? obj[key] : undefined, lang);
+}
+/**
+ * 
+ * @param {an object with languages kind of: { en: { general: { text: { title: 'a title' }}}}} langs 
+ */
+export function translateSetup(langs = {}){
+  // setup languages array
+  languages = langs;
 }

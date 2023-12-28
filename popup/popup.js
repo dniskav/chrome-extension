@@ -1,4 +1,6 @@
-import { translate } from '../scripts/i18n.js';
+import { translate, translateSetup } from '../scripts/i18n.js';
+import en from '../i18n/en.json' assert { type: 'json' };
+import es from '../i18n/es.json' assert { type: 'json' };
 
 const saveButton = document.querySelector('#saveBtn');
 const loadButton = document.querySelector('#loadBtn');
@@ -14,6 +16,10 @@ const languageSelector = document.querySelectorAll('.language input[type=radio]'
 
 window.translate = translate;
 
+translateSetup({
+  en,
+  es,
+});
 
 let months = {
   enero: 1,
